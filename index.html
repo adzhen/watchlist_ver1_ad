@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>Index</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/e2ee/base64_jso.js" language="javascript" type="text/javascript "></script>
+    <script src="js/e2ee/hashprc_jso.js" language="javascript" type="text/javascript"></script>
+    <script src="js/e2ee/jsbn_jso.js" language="javascript" type="text/javascript "></script>
+    <script src="js/e2ee/prng4_jso.js" language="javascript" type="text/javascript"></script>
+    <script src="js/e2ee/rng_jso.js" language="javascript" type="text/javascript "></script>
+    <script src="js/e2ee/rsa_jso.js" language="javascript" type="text/javascript"></script>
+    <script src="js/e2ee/fn.js" language="javascript" type="text/javascript "></script>
+    <!-- <script src="js/tableHeadFixer.js"></script> -->
+    <style>
+
+    </style>
+
+    <!-- <script type="text/javascript">
+        $(document).ready(function () {
+            $("#test").click(function () {
+                var jsonData = {
+                    "Username": "aa",
+                    "Password": "aa",
+                    "RandomKey": "aa",
+                };
+                $.ajax({
+                    datatype: "JSONP",
+                    url: 'http://10.30.84.56:8023/MobileControlService.svc/Login',
+                    type: 'GET',
+                    contentType: 'application/json;',
+                    data: JSON.stringify(jsonData),
+                    success: function (data, success) {
+                        console.log("aa");
+                    },
+                    error: function () {
+                        alert("Login failed.");
+                    }
+                })
+            });
+        });
+    </script> -->
+</head>
+
+<asp:HiddenField ID="hdnE2EEPublicKey" runat="server" />
+<asp:HiddenField ID="hdnE2EESessionId" runat="server" />
+<asp:HiddenField ID="hdnE2EERandomNum" runat="server" />
+
+
+<body style="background:#284d79;">
+    <div class="header_version">V1.0</div>
+    <div class="header_tour">Quick Tour</div>
+
+    <!-- <form id="form"  > -->
+    <fieldset id="form">
+        <div class="login" style="top:35%;font-size:1.5em;">
+            <h2 id="intro"><img src="assets/poems.png"><div style="margin:-15px 0px 15px 0px">Phillip Mobile</div></h2>
+            <!--<<div class="radio-toolbar" style="text-align:center;">
+                 <input type="radio" id="account_live" name="account_type" value="L" checked>
+                 <label for="account_live" style="padding:0px 20px 0px 20px">
+                     <h2 id="intro2" style="width:100px">Live</h2></label>
+                 <input type="radio" id="account_demo" name="account_type" value="D">
+                 <label for="account_demo" style="padding:0px 20px 0px 20px">
+                     <h2 id="intro2" style="width:100px">Demo</h2></label>
+             </div>
+             span id="span1"></span>
+             <input type="text" id="input-user1" name="username" placeholder="Username" required autocomplete="off"/>
+            <input type="password" id="input-pwd1" name="password" placeholder="Password" required />
+             <button id="btn_login" type="submit" class="btn btn-primary btn-block btn-large" style="margin-top:3px;font-size:1em;width: 70%;margin-left: 90px;">LOGIN</button>
+             <div id="sel_language">
+                 <select>
+                     <option>EN</option>
+                     <option>CN</option>
+                 </select>
+             </div>
+             <span id="span1"></span>-->
+
+            <div class="radio-toolbar" style="text-align:center;">
+                <input type="radio" id="account_live" name="account_type" value="L" checked>
+                <label for="account_live" style="padding:0px 20px 0px 20px">
+                    <h2 id="intro2" style="width:100px">Live</h2>
+                </label>
+                <input type="radio" id="account_demo" name="account_type" value="D">
+                <label for="account_demo" style="padding:0px 20px 0px 20px">
+                    <h2 id="intro2" style="width:100px">Demo</h2>
+                </label>
+            </div>
+            <span id="span1"></span>
+            <p></p>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-xs-4" for="input-user1" style="text-align:center; color:white; font-size:0.8em; padding:5px 20px 0px 20px;">
+                        Username:
+                    </label>
+                    <div class="col-xs-8"><input type="text" class="form-control" id="input-user1" placeholder="Enter Username" required autocomplete="off" style="border-radius: 0; font-weight: bold; background-color :white;"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4" for="input-pwd1" style="text-align:center; color:white; font-size:0.8em; padding:5px 20px 0px 20px">
+                        Password:
+                    </label>
+                    <div class="col-xs-8"><input type="password" class="form-control" id="input-pwd1" placeholder="Enter Password" required style="border-radius: 0; font-weight: bold; background-color :white;"></div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4" for="select-lang" style="text-align:center; color:white; font-size:0.8em; padding:5px 20px 0px 20px">
+                        Language:
+                    </label>
+                    <div class="col-xs-8">
+                        <select class="form-control" id="select-lang" style="border-radius: 0; font-size:0.8em; font-weight: bold; background-color :white;">
+                            <option name="EN">ENGLISH</option>
+                            <option name="CN">CHINESE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-4"></label>
+                    <div class="col-xs-8">
+                        <button id="btn_login" class="btn center-block btn-xs" type="submit" style="font-size: 1em;border-radius: 0; width:100%;"><strong style="font-size: 0.8em; ">LOGIN</strong></button>
+                    </div>
+                    <!--<button id="btn_login" class="btn center-block btn-xs" type="submit" style="margin-top: 10px;font-size: 1em;padding: 0px 30px;border-radius: 0;"><strong style="font-size: 0.8em; ">LOGIN</strong></button>-->
+                </div>
+            </div>
+            <div style="width:100%;margin-top:-20px">
+                <div style="float:right;margin-top:10px">
+                  <a href="./ResetPas.html"><span class="" style="color:#c1b4b4;font-size:0.75em;">Reset Password</span></a>
+                </div>
+        </div>
+    </fieldset>
+
+    <!-- </form> -->
+    <!-- ky commented
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">-->
+    <!-- Indicators -->
+    <!-- ky commented
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        -->
+    <!-- <li data-target="#myCarousel" data-slide-to="3"></li> -->
+    <!-- ky commented
+    </ol> -->
+    <!-- Wrapper for slides -->
+    <!-- ky commented
+    <div class="carousel-inner" role="listbox" style="color:#b79847">
+        <div class="item active">
+            <span>System Maintainance going on for iPhone App</span>
+        </div>
+        <div class="item">
+            <span>System Maintainance going on for Note 7</span>
+        </div>
+        <div class="item">
+            <span>NEW : Updated new features patch 9.15 15SEP </span>
+        </div>-->
+    <!-- <div class="item">
+        <span>System Maintainance going on for iPhone App</span>
+    </div> -->
+    <!-- ky commented
+    </div>-->
+    <!-- Left and right controls -->
+    <!-- ky commented
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+         -->
+    <footer>
+        <div class="row">
+            <div class="col-xs-3">
+                <a href="#1" class="">
+                    <img src="assets/viewPrice.png" alt="View Price">
+                    <br />
+                    <span>View Price</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#2" class="">
+                    <img src="assets/News.png" alt="News">
+                    <br />
+                    <span style="padding-right:4px">News</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#3">
+                    <img src="assets/call-24.png" alt="Hotline">
+                    <br />
+                    <span>Hotline</span>
+                </a>
+            </div>
+            <div class="col-xs-3">
+                <a href="#4" class="">
+                    <img src="assets/account.png" alt="Open account">
+                    <br />
+                    <span>Open A/C</span>
+                </a>
+            </div>
+        </div>
+
+    </footer>
+    <!--     <div id="overlay" style="text-align:center">
+        <img src="images/loader.gif" alt="Loading" /><br/>
+        Loading...
+    </div> -->
+</body>
+
+</html>
